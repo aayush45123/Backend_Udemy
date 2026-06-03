@@ -1,4 +1,4 @@
-const http = require('node:http');
+const http = require('http');
 const fs = require('node:fs');
 
 const server = http.createServer((req, res) => {
@@ -6,19 +6,19 @@ const server = http.createServer((req, res) => {
   const path = req.url;
 
   const log = `\n[${Date.now()}]: ${method} ${path}`;
-  fs.appendFileSync('log.txt', log, 'utf-8');
+  fs.appendFileSync('new.txt', log, 'utf-8');
 
   switch (method) {
     case 'GET':
       {
         switch (path) {
           case '/':
-            return res.writeHead(200).end('Hello from the server 👋🏻');
+            return res.writeHead(200).end('Hello from the server side');
           case '/contact-us':
             return res
               .writeHead(200)
               .end(
-                'Sure, Email: piyushgarg.dev@gmail.com and Phone: +91 99999 99999'
+                'Sure, Email: aayushbharda.dev@gmail.com and Phone: +91 91675 41096',
               );
           case '/tweet':
             return res.writeHead(200).end('Tweet-1\nTweet-2');
