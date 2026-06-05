@@ -1,0 +1,9 @@
+services:
+ postgres:
+   image: postgres:17.4
+   environment:
+     POSTGRES_USER: bookstore
+     POSTGRES_PASSWORD: bookstore
+     POSTGRES_DB: bookstore
+   ports:
+     - "5432:5432"

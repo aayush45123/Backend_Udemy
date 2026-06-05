@@ -1,8 +1,9 @@
-const express = require('express');
+const express = require("express");
+require("dotenv/config");
 
-const { loggerMiddleware } = require('./middlewares/logger');
+const { loggerMiddleware } = require("./middlewares/logger");
 
-const bookRouter = require('./routes/book.routes');
+const bookRouter = require("./routes/book.routes");
 
 const app = express();
 const PORT = 8000;
@@ -12,6 +13,6 @@ app.use(express.json());
 app.use(loggerMiddleware);
 
 // Routes
-app.use('/books', bookRouter);
+app.use("/books", bookRouter);
 
 app.listen(PORT, () => console.log(`Http server is running on PORT ${PORT}`));
