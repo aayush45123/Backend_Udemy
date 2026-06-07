@@ -1,5 +1,5 @@
 const express = require("express");
-const { BOOKS } = require("../models/book");
+const { BOOKS } = require("../models/book.model");
 const {
   getBooks,
   getBookById,

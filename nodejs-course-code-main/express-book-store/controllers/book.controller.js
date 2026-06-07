@@ -1,9 +1,10 @@
-const books = require("../models/book.model");
+const {books} = require("../models/book.model");
 const db = require("../db/config");
 const { eq } = require("drizzle-orm");
 
 exports.getBooks = async (req, res) => {
   const allBooks = await db.select().from(books);
+
   return res.json(allBooks);
 };
 
@@ -38,8 +39,8 @@ exports.createBook = async (req, res) => {
 };
 
 exports.deleteBook = async (req, res) => {
-  const id = (req.params.id);
- 
+  const id = req.params.id;
+
   await db.delete(books).where(eq(books.id, id));
 
   return res.status(200).json({ message: "book deleted" });
