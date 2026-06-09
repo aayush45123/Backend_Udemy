@@ -14,3 +14,12 @@ export async function generateToken(payload) {
   const token = jwt.sign(validatedPayload, JWT_SECRET, { expiresIn: "1h" });
   return token;
 }
+
+export async function verifyToken(token) {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET);
+    return decoded;
+  } catch (error) {
+    throw new Error("Invalid or expired token");
+  }
+}
