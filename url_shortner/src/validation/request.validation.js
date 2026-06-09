@@ -5,4 +5,10 @@ export const signUpPostRequestSchema = z.object({
   lastName: z.string().optional(),
   email: z.string().email(),
   password: z.string().min(8),
+  salt: z.string().optional(),
+});
+
+export const loginPostRequestSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
 });
