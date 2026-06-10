@@ -1,5 +1,8 @@
 import { nanoid } from "nanoid";
 import { createShortUrl } from "../services/url.service.js";
+import db from "../db/config.js";
+import urltable from "../models/url.model.js";
+import { eq } from "drizzle-orm";
 
 export const shortenUrl = async (req, res) => {
   const { targetUrl, code } = shortenUrlPostRequestSchema.parse(req.body);
@@ -13,4 +16,28 @@ export const shortenUrl = async (req, res) => {
   });
 
   return res.status(201).json(result);
+};
+
+export const redirectToTargetUrl = async (req, res) => {
+  const shortcode = req.params.shortcode;
+
+  const [result] = await db
+    .select()
+    .from(urltable)
+    .where(eq(urltable.shortUrl, shortcode));
+
+  if (!result) {
+    return res.status(404).json({ error: "Short URL not found" });
+  }
+
+  return res.redirect(result.targetUrl);
+};
+
+export const getUserUrls = async (req, res) => {
+  const codes = await db
+    .select()
+    .from(urltable)
+    .where(eq(urltable.user_id, req.user.id));
+
+  return res.json({ codes });
 };
