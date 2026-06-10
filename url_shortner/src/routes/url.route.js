@@ -5,6 +5,7 @@ import {
   redirectToTargetUrl,
   getUserUrls,
   deleteShortUrl,
+  updateShortUrl,
 } from "../controllers/url.controller.js";
 import { ensureAuthenticated } from "../middleware/auth.middleware.js";
 
@@ -17,6 +18,8 @@ router.post("/shorten", ensureAuthenticated, shortenUrl);
 router.get("/codes", ensureAuthenticated, getUserUrls);
 
 router.delete("/:id", ensureAuthenticated, deleteShortUrl);
+
+router.patch("/:id", ensureAuthenticated, updateShortUrl);
 
 router.get("/:shortcode", redirectToTargetUrl);
 

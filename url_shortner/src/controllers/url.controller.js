@@ -51,3 +51,16 @@ export const deleteShortUrl = async (req, res) => {
 
   return res.json({ message: "Short URL deleted successfully" });
 };
+
+export const updateShortUrl = async (req, res) => {
+  const id = req.params.id;
+  const { shortUrl } = req.body;
+
+  const [updatedUrl] = await db
+    .update(urltable)
+    .set({ shortUrl: shortUrl })
+    .where(and(eq(urltable.id, id), eq(urltable.user_id, req.user.id)))
+    .returning();
+
+  return res.json(updatedUrl);
+};
