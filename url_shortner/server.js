@@ -1,16 +1,14 @@
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 import express from "express";
 
-import { authMiddleware } from "../src/middlewares/auth.middleware.js";
-
 import userRoutes from "./src/routes/user.route.js";
+import urlRoutes from "./src/routes/url.route.js";
 
 const app = express();
 app.use(express.json());
-app.use(authMiddleware);
 
 app.use("/users", userRoutes);
+app.use("/urls", urlRoutes);
 
 const PORT = process.env.PORT || 8000;
 
